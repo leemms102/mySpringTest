@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.5.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.ContactDAO">
+    <insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="m_id">
+        <choose><when test="profile != null"><![CDATA[
+        insert into mydb.members
+            (m_name, m_phoneno, m_addr, m_email, m_profile)
+        values
+            (#{name}, #{phoneno}, #{addr}, #{email}, #{profile})
+         ]]></when>
+
+        <otherwise><![CDATA[
+        insert into mydb.members
+        (m_name, m_phoneno, m_addr, m_email)
+        values
+        (#{name}, #{phoneno}, #{addr}, #{email})
+        ]]></otherwise>
+    </choose>
+    </insert>
+
+    <insert id="vo_insert">
+        insert into mydb.members
+            (m_name, m_phoneno, m_addr, m_email)
+        values
+            (#{name}, #{phoneno}, #{addr}, #{email})
+    </insert>
+
+    <select id="detail" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+        select
+            m_name,
+            m_phoneno,
+            m_addr,
+            m_email,
+            m_profile
+        from
+            mydb.members
+        where
+            m_id = #{m_id}
+        ]]>
+    </select>
+
+    <select id="vo_detail" parameterType="com.example.test.MemberVO" resultType="com.example.test.MemberVO">
+	<![CDATA[
+        select
+            m_id as id,
+            m_name as name,
+            m_phoneno as phoneno,
+            m_addr as addr,
+            m_email as email
+        from
+            mydb.members
+        where
+            m_id = #{id}
+        ]]>
+    </select>
+
+    <update id="update" parameterType="hashMap">
+	<![CDATA[
+        update mydb.members set
+                        m_name = #{name},
+                        m_phoneno = #{phoneno},
+                        m_addr = #{addr},
+                        m_email = #{email},
+                        m_profile = #{profile}
+        where
+            m_id = #{m_id}
+        ]]>
+    </update>
+
+    <update id="vo_update" parameterType="com.example.test.MemberVO">
+	<![CDATA[
+        update mydb.members set
+                                m_name = #{name},
+                                m_phoneno = #{phoneno},
+                                m_addr = #{addr},
+                                m_email = #{email}
+        where
+            m_id = #{id}
+        ]]>
+    </update>
+
+    <delete id="delete" parameterType="hashMap">
+	<![CDATA[
+        delete from mydb.members
+        where
+            m_id = #{m_id}
+        ]]>
+    </delete>
+
+    <delete id="vo_delete" parameterType="com.example.test.MemberVO">
+	<![CDATA[
+        delete from mydb.members
+        where
+            m_id = #{id}
+        ]]>
+    </delete>
+
+    <select id="list" parameterType="hashMap" resultType="hashMap">
+        <![CDATA[
+		select *
+        from
+            mydb.members
+		where 1 = 1
+	]]>
+        <if test="keyword != null and keyword != ''">
+            and (m_name like CONCAT('%',#{keyword},'%') or m_addr like CONCAT('%',#{keyword},'%'))
+        </if>
+        order by m_id
+    </select>
+
+
+</mapper>
