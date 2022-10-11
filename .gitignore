@@ -34,4 +34,4 @@ build/
 
 ### VS Code ###
 
-/src/main/webapp/upload/
+/src/main/webapp/upload/**/
