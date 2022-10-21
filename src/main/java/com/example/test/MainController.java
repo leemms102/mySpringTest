@@ -1,26 +1,19 @@
 package com.example.test;
 
 import com.example.utils.FileUtil;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -120,8 +113,8 @@ public class MainController {
 //        List<String> fileList = new ArrayList<>();
 //
 //        // 파일 업로드
-//        for(MultipartFile f : multipartFile) {
-//            if(!f.isEmpty()) {
+//        for (MultipartFile f : multipartFile) {
+//            if (!f.isEmpty()) {
 //                System.out.println("파일 이름 : " + f.getOriginalFilename());
 //                System.out.println("파일 타입 : " + f.getContentType());
 //                System.out.println("파일 크기 : " + f.getSize());
@@ -133,8 +126,8 @@ public class MainController {
 //        ModelAndView mv = new ModelAndView();
 //        mv.setViewName("ajax-upload-result");
 //        return mv;
-//
 //    }
+
     @ResponseBody
     @PostMapping(value = "/ajax-upload-result")
     public String  fileUpload(Model model, MultipartHttpServletRequest request) {

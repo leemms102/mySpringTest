@@ -8,7 +8,6 @@ public class MemberVO {
     private String addr;
     private String email;
 
-
     public int getId() {
         return id;
     }
