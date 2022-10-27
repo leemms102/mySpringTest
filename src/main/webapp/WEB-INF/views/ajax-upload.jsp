@@ -13,14 +13,17 @@
 <body>
 
 <div class="container">
-    <h2>파일업로드</h2>
+    <h2>파일 업로드</h2>
     <form name="dataForm" id="dataForm" enctype="multipart/form-data" onsubmit="return registerAction()">
 <%--        <button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>--%>
+        <label for="input_file">
+            <img src="/upload/photo_add.png"; style="width:80px; cursor:pointer;">
+        </label>
         <input id="input_file" accept="image/*" multiple="multiple" type="file">
+        <br>
         <span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
         <div class="data_file_txt" id="data_file_txt" style="margin:40px;">
-            <span>첨부 파일</span>
-            <br />
+            <span>첨부 파일 목록</span>
             <div id="imgList">
             </div>
         </div>
@@ -123,9 +126,12 @@
             processData: false,
             contentType: false,
             success: function (data) {
+                if(content_files.length == 0) alert("사진을 한 장 이상 등록해주세요");
               //  if(JSON.parse(data)['result'] == "OK"){
+                else {
                     alert("업로드 성공");
                     console.log(data);
+                }
              //   } else
                //     alert("잠시 후 다시 시도해주세요");
             },
