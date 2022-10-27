@@ -148,7 +148,9 @@ public class MainController {
         }
 
         model.addAttribute("log","사진 "+fileList.size()+"장 전송완료!");
-        return "/ajax-upload :: #resultDiv";
+//        return "/ajax-upload :: #resultDiv";
+
+        return "ajax-upload-result";
 
     }
 
